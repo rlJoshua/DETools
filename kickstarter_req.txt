@@ -1,0 +1,22 @@
+1) list(collection.find().sort([('pledged', -1)]).limit(5))
+
+2)print(collection.find({'usd pledged': {'$gte' : '$goal'}}).count())
+##ou
+next(collection.aggregate([
+        {"$match":{'usd pledged': {"$gte": '$goal'}}},
+        {"$count" : "nb_project"}
+    ]))
+
+3) list(collection.aggregate([{"$group" : {"_id" : "$category", "nb_category" : {"$sum" : 1}}}]))
+
+4) year = datetime.datetime(2016, 1, 1, 0,0,0)
+list(collection.find({"country":"FR", "launched" : {"$lt" : year}}))
+
+5) list(collection.find({"country":"US", "usd_pledged_real" : {"$gt": 0.200000}}))
+
+6) collection.create_index([("name", "text")])
+
+next(collection.aggregate([
+        {"$match":{"$text":{"$search" : "Sport"}}},
+        {"$count" : "nb_project"}
+    ]))

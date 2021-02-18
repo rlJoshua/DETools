@@ -1,0 +1,21 @@
+1) list(collection.find({'channel_title':'Apple'}))
+
+2) list(collection.aggregate([
+    {"$group" : {"_id" : "$category_id"}},
+    {"$count": "total_category"}
+]))
+
+3)
+
+4) list(collection.find().sort([('views', -1)]).limit(3))
+
+5) list(collection.aggregate([{"$group" : {"_id" : "$category_id", "averageView" : {"$avg" : "$views"}}}]))
+
+6)list(collection.aggregate([
+    {"$group":{
+        "_id" : "$channel_title", 
+        "averageLike" : {"$avg" :"$likes"}}
+    },
+    {"$sort" : {"averageLike" : -1}},
+    {"$limit" : 5}
+]))
